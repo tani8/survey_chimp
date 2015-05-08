@@ -3,11 +3,7 @@
 <h3> <%= @survey.description %> </h3>
 <br>
 <%= @question.body %>
-<% @choice_array.each do |answer_option| %>
-<form>
-  <input type="radio" value="<%= answer_option %>"><%= answer_option %>
-</form>
-<% end %>
+
 
 <a href="/home"><button type="button">Home</button></a>
 

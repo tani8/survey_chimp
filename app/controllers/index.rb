@@ -59,10 +59,12 @@ post '/home/survey' do
 end
 
 get "/survey/:id" do
-  @survey = Survey.where(id: params[:id]).first
-  @question = @survey.questions
-
-  erb :display_survey
+  @survey = Survey.find(params[:id])
+  @question = @survey.questions.first
+  @choices = @question.choices.answer
+  # @choices.each do |choice|
+  #   puts choice.answer
+  # end
 end
 
 

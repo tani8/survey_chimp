@@ -1,0 +1,37 @@
+<h1> Create Your Survey </h1>
+
+<!-- <%=  %> -->
+
+
+<form id="question_form" action="/home/survey" method="post">
+  Title:
+  <input type="text" name ="title">
+  Description:
+  <input type="text" name ="description">
+  <br>
+  <hr>
+  <br>
+  <br>
+  <div>
+  <ol class="question_number">
+    <div class="question_area">
+      <li>
+
+          Enter Question:
+          <input type="text" name="body">
+          <br>
+          Enter Answers (seperated by commas):
+          <input type="text" name="answer">
+          <br>
+          <!-- <input type="submit" value="Submit Answers"> -->
+
+      </li>
+    </div>
+
+  </ol>
+</div>
+<button type="submit">Create Survey</button></a>
+</form>
+
+<!-- <button type="submit" class="add_question_button">Add another Question</button> -->
+<footer>&copy; Banana, Inc.</footer>

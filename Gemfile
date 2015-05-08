@@ -16,6 +16,9 @@ gem 'rake'
 gem 'shotgun'
 gem 'hirb'
 
+# installs bcrypt
+gem 'bcrypt'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'

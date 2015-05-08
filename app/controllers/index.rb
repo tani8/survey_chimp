@@ -22,3 +22,20 @@ post '/creator' do
 
 end
 
+get '/home' do
+  # @user = Creator.find(id: session[:id])
+
+  erb :home
+end
+
+get "/home/form" do
+  erb :create_survey
+end
+
+get "/home/all" do
+  erb :view_all
+end
+
+
+
+

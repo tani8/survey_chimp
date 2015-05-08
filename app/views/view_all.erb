@@ -1,2 +1,12 @@
-HOWIE! HEEEEEY@!
-TANIYAS MIND IS FLOWING DIRTY
+<div class = "display_all_surveys">
+  <h1> Here are all of your surveys! </h1>
+
+
+  <ol>
+  <% @surveys.each do |survey| %>
+    <a href="/survey/<%= survey.id %>"><h2><li><%= survey.title %></li></h2></a>
+    <p><%= survey.description %></p>
+    <br>
+    <% end %>
+  </ol>
+</div>

@@ -1,3 +1,16 @@
- <h1>Welcome to Survey Chimp!</h1>
- <p><a href="/login"><button>Login</button></a></p>
- <p><a href="/sign_up"><button>Sign Up</button></a></p>
+<% if !logged_in? %>
+  <h1>Welcome to Survey Chimp!</h1>
+  <p><a href="/login"><button>Login</button></a></p>
+  <p><a href="/sign_up"><button>Sign Up</button></a></p>
+<% else %>
+
+  <h1>Survey Chimp</h1>
+  <h3>Welcome back <%= current_creator.name %></h3>
+  <p><a href="/logout"><button>Logout</button></a></p>
+
+  <p><a href="/home/survey"><button type="button">Create Survey</button></a></p>
+  <p><a href="/home/all"><button type="button">View All Survey</button></a></p>
+
+  <footer>&copy; Banana, Inc.</footer>
+
+<% end %>

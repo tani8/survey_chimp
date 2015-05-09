@@ -1,5 +1,6 @@
 helpers do
-    def login(creator)
+
+  def login(creator)
     session[:id] = creator.id
   end
 

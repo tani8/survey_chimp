@@ -4,17 +4,14 @@ get '/' do
   erb :index
 end
 
-#homepage with creating or viewing options
-get '/home' do
-  # @user = Creator.find(id: session[:id])
-  erb :home
-end
-
 #create new form
+# get "/surveys/new" do
 get "/home/survey" do
   erb :create_survey
 end
 
+# CREATE
+# post "/surveys" do
 post '/home/survey' do
   @survey = Survey.create(
     title: params[:title],
@@ -39,6 +36,7 @@ post '/home/survey' do
   erb :display_survey
 end
 
+# get "/surveys/:id" do
 get "/survey/:id" do
   @survey = Survey.find(params[:id])
   @question = @survey.questions.first
@@ -49,6 +47,8 @@ get "/survey/:id" do
 end
 
 #displays all forms created
+# Surveys INDEX route
+# get "/surveys" do
 get "/home/all" do
   @surveys = Survey.all
 
@@ -89,10 +89,15 @@ post '/login' do
 
   if @creator && @creator.password == params[:password]
     login(@creator)
-    redirect '/home'
+    redirect '/'
   else
     status 401
     @login_error = "The Email or Password is wrong!!!"
     redirect '/login'
   end
+end
+
+get '/logout' do
+  logout
+  redirect to('/')
 end

@@ -1,31 +1,12 @@
+# renders the index page
+
 get '/' do
-
-  redirect '/'
+  erb :index
 end
-
-# get '/creator' do
-#   @creator = Creator.all
-
-#   erb :index
-# end
-
-# #new
-# get '/creator/new' do
-#   @creator = Creator.new
-
-#   erb :new_survey_form
-# end
-
-# #create
-# post '/creator' do
-#   @creator = Creator.new(name: params[:name])
-
-# end
 
 #homepage with creating or viewing options
 get '/home' do
   # @user = Creator.find(id: session[:id])
-
   erb :home
 end
 
@@ -67,8 +48,6 @@ get "/survey/:id" do
   # end
 end
 
-
-
 #displays all forms created
 get "/home/all" do
   @surveys = Survey.all
@@ -77,7 +56,43 @@ get "/home/all" do
 end
 
 
+# renders login page
+get '/login' do
+  erb :login_form
+end
 
+# renders sign-up page
+get '/sign_up' do
+  @creator = Creator.new
 
+  erb :new_creator_form
+end
 
+# sign-in page
+post '/sign_up' do
+    @creator = Creator.new(name: params[:name], email: params[:email], password_hash: params[:password_hash])
+    @creator.password = params[:password_hash]
 
+   if @creator.save
+      status 200
+      erb :creator_show_form
+      # add redirect to the /home route
+    else
+      status 404
+      erb :new_creator_form
+    end
+ end
+
+# login page
+post '/login' do
+  @creator = Creator.find_by_email(params[:login])
+
+  if @creator && @creator.password == params[:password]
+    login(@creator)
+    redirect '/home'
+  else
+    status 401
+    @login_error = "The Email or Password is wrong!!!"
+    redirect '/login'
+  end
+end

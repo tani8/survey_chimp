@@ -1,7 +1,10 @@
-# renders the index page
-
 get '/' do
   erb :index
+end
+
+get '/home' do
+  # @user = Creator.find(id: session[:id])
+  erb :home
 end
 
 #create new form
@@ -29,10 +32,8 @@ post '/home/survey' do
   @choice_array = @choice_string.split(',')
   @choice_array.each do |choice|
     Choice.create(answer: choice, question_id: @question.id)
-
   end
-   # erb :create_survey
-   # redirect '/home/display_survey'
+
   erb :display_survey
 end
 
@@ -46,12 +47,10 @@ get "/survey/:id" do
   # end
 end
 
+
 #displays all forms created
-# Surveys INDEX route
-# get "/surveys" do
 get "/home/all" do
   @surveys = Survey.all
-
   erb :view_all
 end
 

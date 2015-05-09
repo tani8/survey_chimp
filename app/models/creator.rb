@@ -5,6 +5,10 @@ class Creator < ActiveRecord::Base
 
   has_many :surveys
 
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true, format: {:with => /@/}
+  validates :password, presence: true
+
   def password
     # Initialize a BCrypt::Password instance from hashed password
     @password ||= Password.new(password_hash)

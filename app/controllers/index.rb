@@ -1,66 +1,47 @@
-
+# renders the index page
 get '/' do
-
-  # redirect '/home/sign_up'
   erb :index
 end
 
-# /home/all
-get '/home' do
-  @creator = Creator.all
-
+# renders login page
+get '/login' do
   erb :login_form
 end
 
-#new = /home
-get '/home/sign_up' do
+# renders sign-up page
+get '/sign_up' do
   @creator = Creator.new
 
   erb :new_creator_form
 end
 
-# create
-post '/home' do
-@creator = @creator = Creator.new(name: params[:name], email: params[:email], password_hash: params[:password_hash])
+# sign-in page
+post '/sign_up' do
+    @creator = Creator.new(name: params[:name], email: params[:email], password_hash: params[:password_hash])
     @creator.password = params[:password_hash]
-    @creator.save!
-#  if @creator.save
-#     status 200
-#     erb :creator_show_form
-#   else
-#     status 404
-#     erb :new_creator_form
-#   end
+
+   if @creator.save
+      status 200
+      erb :creator_show_form
+      # add redirect to the /home route
+    else
+      status 404
+      erb :new_creator_form
+    end
  end
 
-# /home/sign-in aka /login
-get '/home/:id' do
+# login page
+post '/login' do
+  @creator = Creator.find_by_email(params[:login])
 
-  @creator = Creator.find_by_email(params[:email])
-    if @creator.password == params[:password_hash]
-      give_token
-    else
-      redirect_to home_url
-    end
-
-  # @creator = Creator.where(id: params[:id]).first
-
-  # if @creator
-  #   erb :creator_show_form
-  # else
-  #   status 404
-  #   "Try Again!!"
-  # end
-end
-
-#edit/update
-get '/home/:id/edit' do
-
-  erb :edit_creator_form
-end
-
-put '/home/:id' do
-
+  if @creator && @creator.password == params[:password]
+    login(@creator)
+    redirect '/home'
+  else
+    status 401
+    @login_error = "The Email or Password is wrong!!!"
+    redirect '/login'
+  end
 end
 
 

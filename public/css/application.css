@@ -1,3 +1,17 @@
+body{
+  background-color: #FFFF99;
+}
+.homepage{
+  text-align: center;
+  margin-top: 20%;
+/*  background-image: url("http://content.mycutegraphics.com/backgrounds/food/banana-background.gif");
+  background-repeat: repeat-y;*/
+
+}
+.homepage hr{
+  margin-top: 20%;
+  text-align: center;
+}
 .display_all_surveys{
   text-align: center;
 }

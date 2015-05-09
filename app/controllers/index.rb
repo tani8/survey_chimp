@@ -1,5 +1,4 @@
 get '/' do
-
   redirect '/'
 end
 
@@ -25,7 +24,6 @@ end
 #homepage with creating or viewing options
 get '/home' do
   # @user = Creator.find(id: session[:id])
-
   erb :home
 end
 
@@ -51,28 +49,26 @@ post '/home/survey' do
   @choice_array = @choice_string.split(',')
   @choice_array.each do |choice|
     Choice.create(answer: choice, question_id: @question.id)
-
   end
-   # erb :create_survey
-   # redirect '/home/display_survey'
+
   erb :display_survey
 end
 
-get "/survey/:id" do
-  @survey = Survey.find(params[:id])
-  @question = @survey.questions.first
-  @choices = @question.choices.answer
-  # @choices.each do |choice|
-  #   puts choice.answer
-  # end
-end
+# get "/survey/:id" do
+#   @survey = Survey.find(params[:id])
+#   @question = @survey.questions.first
+#   @choices = @question.choices.answer
+#   # @choices.each do |choice|
+#   #   puts choice.answer
+#   # end
+# end
 
 
 
 #displays all forms created
+
 get "/home/all" do
   @surveys = Survey.all
-
   erb :view_all
 end
 

@@ -37,18 +37,8 @@ post '/home/survey' do
   erb :display_survey
 end
 
-# get "/surveys/:id" do
-get "/survey/:id" do
-  @survey = Survey.find(params[:id])
-  @question = @survey.questions.first
-  @choices = @question.choices.answer
-  # @choices.each do |choice|
-  #   puts choice.answer
-  # end
-end
-
-
 #displays all forms created
+
 get "/home/all" do
   @surveys = Survey.all
   erb :view_all
